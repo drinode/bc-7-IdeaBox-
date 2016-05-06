@@ -16,7 +16,10 @@ $ pip install -r requirements.txt
 
 Run a development server.
 
-$ python manage.py runserver
+$ python app.py runserver
+
+# Login Credentials
+Password = secret
 
 
 
