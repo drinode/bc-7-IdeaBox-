@@ -14,6 +14,7 @@ from micawber.cache import Cache as OEmbedCache
 from peewee import *
 from playhouse.flask_utils import FlaskDB, get_object_or_404, object_list
 from playhouse.sqlite_ext import *
+from bs4 import BeautifulSoup
 
 
 
@@ -46,7 +47,7 @@ class Entry(flask_db.Model):
     content = TextField()
     published = BooleanField(index=True)
     timestamp = DateTimeField(default=datetime.datetime.now, index=True)
-
+    #try to use moments instead!!!!!
     @property
     def html_content(self):
         hilite = CodeHiliteExtension(linenums=False, css_class='highlight')
@@ -127,7 +128,7 @@ def login():
         password = request.form.get('password')
         if password == app.config['ADMIN_PASSWORD']:
             session['logged_in'] = True
-            session.permanent = True  # Use cookie to store session.
+            session.permanent = True  
             flash('You are now logged in.', 'success')
             return redirect(next_url or url_for('index'))
         else:
